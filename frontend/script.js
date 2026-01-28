@@ -1,5 +1,5 @@
 // API Configuration
-const API_URL = 'http://localhost:8000';
+const API_URL = 'https://creditscoringproject-production.up.railway.app';
 
 // Fill sample data
 function fillSampleData() {
