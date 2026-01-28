@@ -2,6 +2,8 @@
 
 A production-ready credit scoring system powered by machine learning, featuring an XGBoost model trained on real financial data to predict credit default risk with 86.87% AUC-ROC accuracy.
 
+Link: https://credit-scoring-project.vercel.app/
+
 ## Overview
 
 This project implements an end-to-end credit scoring solution that analyzes customer financial data to assess credit risk in real-time. The system combines advanced machine learning techniques with a modern web interface and RESTful API.
