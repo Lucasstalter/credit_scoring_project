@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Scoring | Análise Inteligente de Risco</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="translations.js"></script>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                    <path d="M16 8L24 16L16 24L8 16L16 8Z" fill="white"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                            <stop offset="0%" stop-color="#10B981"/>
+                            <stop offset="100%" stop-color="#047857"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>Credit Scoring</span>
+            </div>
+            <div class="nav-links">
+    <a href="#features" data-i18n="nav.features">Features</a>
+    <a href="#demo" data-i18n="nav.demo">Demo</a>
+    <a href="http://localhost:8000/docs" target="_blank" data-i18n="nav.api">API Docs</a>
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="pt" onclick="setLanguage('pt')">
+            <span class="lang-flag">🇧🇷</span>
+            <span>PT</span>
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">
+            <span class="lang-flag">🇺🇸</span>
+            <span>EN</span>
+        </button>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
+</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge" data-i18n="hero.badge">Powered by Machine Learning</div>
+                <h1 class="hero-title">
+                    <span data-i18n="hero.title.line1">Análise de crédito inteligente</span><br>
+                    <span class="gradient-text" data-i18n="hero.title.line2">em tempo real</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">
+                    Sistema de credit scoring baseado em XGBoost com 86.87% de precisão,
+                    treinado com 150.000 casos reais para decisões de crédito assertivas.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn btn-primary" data-i18n="hero.cta.primary">Testar agora</a>
+                    <a href="http://localhost:8000/docs" target="_blank" class="btn btn-secondary">
+                        <span data-i18n="hero.cta.secondary">Ver documentação</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">86.87%</div>
+                    <div class="stat-label" data-i18n="hero.stats.auc">AUC-ROC Score</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">150k+</div>
+                    <div class="stat-label" data-i18n="hero.stats.data">Dados de Treino</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">&lt;100ms</div>
+                    <div class="stat-label" data-i18n="hero.stats.time">Tempo de Resposta</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="features.title">Como funciona</h2>
+                <p data-i18n="features.subtitle">Tecnologia de ponta para decisões de crédito precisas</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="features.card1.title">Modelo XGBoost</h3>
+                    <p data-i18n="features.card1.desc">Algoritmo de gradient boosting otimizado com validação cruzada e tuning de hiperparâmetros.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="features.card2.title">Análise em Tempo Real</h3>
+                    <p data-i18n="features.card2.desc">Processamento instantâneo com latência inferior a 100ms para decisões rápidas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 3H21V21H3V3Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M9 9H15V15H9V9Z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="features.card3.title">Dados Reais</h3>
+                    <p data-i18n="features.card3.desc">Treinado com dataset Kaggle "Give Me Some Credit" contendo 150.000 registros reais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="demo.title">Demonstração</h2>
+                <p data-i18n="demo.subtitle">Preencha os dados abaixo para simular uma análise de crédito</p>
+            </div>
+
+            <div class="demo-container">
+                <form id="creditForm" class="form">
+                    <!-- Personal Info -->
+                    <div class="form-section">
+                        <h3 class="form-section-title" data-i18n="form.section1">Informações Pessoais</h3>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="customer_id" data-i18n="form.customer_id">ID do Cliente</label>
+                                <input type="text" id="customer_id" placeholder="Ex: CLI001" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="idade" data-i18n="form.idade">Idade</label>
+                                <input type="text" id="idade" placeholder="35" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Info -->
+                    <div class="form-section">
+                        <h3 class="form-section-title" data-i18n="form.section2">Informações Financeiras</h3>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="renda_mensal" data-i18n="form.renda_mensal">Renda Mensal</label>
+                                <div class="input-prefix">
+                                    <span>R$</span>
+                                    <input type="number" id="renda_mensal" step="0.01" placeholder="5000.00" required>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="divida_total" data-i18n="form.divida_total">Dívida Total</label>
+                                <div class="input-prefix">
+                                    <span>R$</span>
+                                    <input type="number" id="divida_total" step="0.01" placeholder="15000.00" required>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="limite_credito" data-i18n="form.limite_credito">Limite de Crédito</label>
+                                <div class="input-prefix">
+                                    <span>R$</span>
+                                    <input type="number" id="limite_credito" step="0.01" placeholder="10000.00" required>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="saldo_utilizado" data-i18n="form.saldo_utilizado">Saldo Utilizado</label>
+                                <div class="input-prefix">
+                                    <span>R$</span>
+                                    <input type="number" id="saldo_utilizado" step="0.01" placeholder="7000.00" required>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="valor_parcela" data-i18n="form.valor_parcela">Valor da Parcela</label>
+                                <div class="input-prefix">
+                                    <span>R$</span>
+                                    <input type="number" id="valor_parcela" step="0.01" placeholder="500.00" required>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="renda_std_6m" data-i18n="form.renda_std_6m">Volatilidade de Renda</label>
+                                <div class="input-prefix">
+                                    <span>R$</span>
+                                    <input type="number" id="renda_std_6m" step="0.01" placeholder="200.00" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Credit History -->
+                    <div class="form-section">
+                        <h3 class="form-section-title" data-i18n="form.section3">Histórico de Crédito</h3>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="idade_credito_meses" data-i18n="form.idade_credito_meses">Idade do Crédito (meses)</label>
+                                <input type="number" id="idade_credito_meses" min="0" placeholder="60" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="tempo_emprego_meses" data-i18n="form.tempo_emprego_meses">Tempo de Emprego (meses)</label>
+                                <input type="number" id="tempo_emprego_meses" min="0" placeholder="24" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="atrasos_30d" data-i18n="form.atrasos_30d">Atrasos 30-59 dias</label>
+                                <input type="number" id="atrasos_30d" min="0" placeholder="1" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="atrasos_90d" data-i18n="form.atrasos_90d">Atrasos 90+ dias</label>
+                                <input type="number" id="atrasos_90d" min="0" placeholder="0" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="pagamentos_dia" data-i18n="form.pagamentos_dia">Pagamentos em Dia</label>
+                                <input type="number" id="pagamentos_dia" min="0" max="12" placeholder="11" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="fillSampleData()">
+                            <span data-i18n="form.btn.example">Preencher exemplo</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span data-i18n="form.btn.submit">Analisar crédito</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Result Card -->
+                <div id="resultCard" class="result-card" style="display: none;">
+                    <div class="result-header">
+                        <div class="result-status" id="resultStatus">
+                            <div class="status-indicator approved"></div>
+                            <span id="statusText" data-i18n="result.approved">Aprovado</span>
+                        </div>
+                        <div class="result-score">
+                            <div class="score-label" data-i18n="result.score">Score de Risco</div>
+                            <div class="score-value" id="scoreValue">23.5%</div>
+                        </div>
+                    </div>
+
+                    <div class="result-metrics">
+                        <div class="metric">
+                            <div class="metric-label" data-i18n="result.customer">Cliente</div>
+                            <div class="metric-value" id="metricCustomer">-</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label" data-i18n="result.category">Categoria</div>
+                            <div class="metric-value" id="metricCategory">-</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label" data-i18n="result.limit">Limite Recomendado</div>
+                            <div class="metric-value" id="metricLimit">-</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label" data-i18n="result.timestamp">Timestamp</div>
+                            <div class="metric-value" id="metricTimestamp">-</div>
+                        </div>
+                    </div>
+
+                    <div class="risk-bar">
+                        <div class="risk-bar-fill" id="riskBarFill" style="width: 0%"></div>
+                        <div class="risk-markers">
+                            <span data-i18n="result.risk.low">Baixo</span>
+                            <span data-i18n="result.risk.medium">Médio</span>
+                            <span data-i18n="result.risk.high">Alto</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-secondary btn-block" onclick="resetForm()">
+                        <span data-i18n="result.btn.new">Nova análise</span>
+                    </button>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loading" class="loading-state" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p data-i18n="loading.text">Processando análise...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="errorCard" class="error-card" style="display: none;">
+                    <div class="error-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="12" cy="16" r="1" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="error.title">Erro ao processar</h3>
+                    <p id="errorMessage" data-i18n="error.message">Ocorreu um erro ao processar sua solicitação.</p>
+                    <button class="btn btn-secondary" onclick="hideError()">
+                        <span data-i18n="error.btn">Tentar novamente</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                            <rect width="32" height="32" rx="8" fill="url(#gradient2)"/>
+                            <path d="M16 8L24 16L16 24L8 16L16 8Z" fill="white"/>
+                            <defs>
+                                <linearGradient id="gradient2" x1="0" y1="0" x2="32" y2="32">
+                                    <stop offset="0%" stop-color="#10B981"/>
+                                    <stop offset="100%" stop-color="#047857"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        Credit Scoring
+                    </div>
+                    <p data-i18n="footer.description">Sistema de análise de crédito baseado em Machine Learning</p>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-tech">
+                        <span>Python</span>
+                        <span>XGBoost</span>
+                        <span>FastAPI</span>
+                        <span>Docker</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">© 2026 Credit Scoring. Desenvolvido para fins educacionais.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
